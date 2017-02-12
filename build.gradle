@@ -1,0 +1,29 @@
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+task compilej6(type: JavaCompile) {
+    source = fileTree(dir: "src/main/java")
+    classpath = sourceSets.main.compileClasspath
+    destinationDir = sourceSets.main.output.classesDir
+    includes = ['com/example/Java6Main.java']
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+}
+
+compileJava {
+    excludes = ['**/Java6Main.java']
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    options.encoding = 'UTF-8'
+}
+
+tasks.compileJava.dependsOn('compilej6')
+
+
